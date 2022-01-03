@@ -5,7 +5,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import axios from "axios";
 
-class Table extends Component {
+class FilteredTable extends Component {
     state = {
         rowData : []
     }
@@ -20,7 +20,7 @@ class Table extends Component {
         }).then((Response) => {
             this.setState({
                 rowData : Response.data
-                })
+            })
         } )
     }
 
@@ -32,13 +32,13 @@ class Table extends Component {
             >
                 <AgGridReact
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true} filter={true}/>
-                    <AgGridColumn field="model" sortable={true} filter={true}/>
-                    <AgGridColumn field="price" sortable={true} filter={true}/>
+                    <AgGridColumn field="make" sortable={true} filter={'Toyota'}/>
+                    <AgGridColumn field="model" sortable={true}/>
+                    <AgGridColumn field="price" sortable={true}/>
                 </AgGridReact>
             </div>
         );
     }
 }
 
-export default Table;
+export default FilteredTable;
