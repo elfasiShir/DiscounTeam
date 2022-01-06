@@ -30,6 +30,7 @@ class NavigationBar extends React.Component {
                             return (
                                 <NavLink to = {link.path} activeClassName={"active"} style={{marginBottom: "10px", textDecoration: "none", color: "#222831"}}>
                                     <li >{link.title}</li>
+                                    <br/>
                                 </NavLink>
                             );
                         })

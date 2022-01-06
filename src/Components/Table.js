@@ -33,8 +33,8 @@ class Table extends Component {
                 <AgGridReact
                     rowData={this.state.rowData}>
                     <AgGridColumn field="make" sortable={true} filter = { true }/>
-                    <AgGridColumn field="model" sortable={true}/>
-                    <AgGridColumn field="price" sortable={true}/>
+                    <AgGridColumn field="model" sortable={true} filter = { true }/>
+                    <AgGridColumn field="price" sortable={true} filter = { true }/>
                 </AgGridReact>
             </div>
         );
