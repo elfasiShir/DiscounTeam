@@ -28,7 +28,7 @@ class Table extends Component {
         return (
             <div
                 className="ag-theme-alpine"
-                style={{ height: '2000px', width: '800px'}}
+                style={{ height: '2000px', width: '600px'}}
             >
                 <AgGridReact
                     rowData={this.state.rowData}>

@@ -3,7 +3,9 @@
 
 .ag-theme-alpine {
   @include ag-theme-alpine((
-          odd-row-background-color: #BFC8DC
+          odd-row-background-color: #BFC8DC,
+          margin-left: auto,
+          margin-right: auto
   ));
 }
 *{
