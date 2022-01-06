@@ -1,41 +1,37 @@
 import '../App.scss'
 import * as React from "react";
-import {Link, NavLink} from "react-router-dom";
-import Cookies from "universal-cookie";
+import { NavLink} from "react-router-dom";
+import Cookies from "universal-cookie/lib";
 
 class NavigationBar extends React.Component {
     state = {
-        links: [{title: "Log-in", path: "/LoginPage"},
-            {title: "Sign-up", path: "/SignUp"},
-            {title: "Shops", path: "/Shop"},
-            {title: "My Discounts", path: "/FilteredTable"},
-            {title: "All Discounts", path: "/Table"},
-            {title: "Settings", path: "/Settings"},
-            {title: "About", path: "/About"}
+        links: [{title: "Log-in", path: "/loginPage"},
+            {title: "Sign-up", path: "/signUp"},
+            {title: "Shops", path: "/Shops"},
+            {title: "My Discounts", path: "/myDiscounts"},
+            {title: "All Discounts", path: "/allDiscounts"},
+            {title: "Settings", path: "/settings"},
+            {title: "About", path: "/about"}
         ]
     }
 
     logout = () => {
-        const cookies = new Cookies();
+        const cookies = new Cookies;
         cookies.remove("logged_in");
         window.location.reload();
     }
 
     render() {
         return (
-            <div style={{marginRight: "20px", marginLeft: "20px", borderRight: "1px solid", paddingRight: "20px"}}>
+            <div style={{marginRight: "20px", marginLeft: "20px", borderRight: "1px solid", paddingRight: "20px", }}>
                 <ul>
                     {
                         this.state.links.map(link => {
                             return (
-                                <NavLink to={link.path} className={"link"} activeClassName={"active"}>
-                                    <li style={{marginBottom: "10px"}}>
-                                        <i>
-                                            {link.title}
-                                        </i>
-                                    </li>
+                                <NavLink to = {link.path} activeClassName={"active"} style={{marginBottom: "10px", textDecoration: "none", color: "#222831"}}>
+                                    <li >{link.title}</li>
                                 </NavLink>
-                            )
+                            );
                         })
                     }
                     <button onClick={this.logout}>

@@ -10,10 +10,10 @@ class FilteredTable extends Component {
         rowData : []
     }
     componentDidMount() {
-        this.useEffect()
+        this.geta()
     }
 
-    useEffect() {
+    geta = ()  => {
         axios.get('https://www.ag-grid.com/example-assets/row-data.json', {
             params: {
             }
@@ -32,7 +32,7 @@ class FilteredTable extends Component {
             >
                 <AgGridReact
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true} filter={'Toyota'}/>
+                    <AgGridColumn field="make" sortable={true}/>
                     <AgGridColumn field="model" sortable={true}/>
                     <AgGridColumn field="price" sortable={true}/>
                 </AgGridReact>

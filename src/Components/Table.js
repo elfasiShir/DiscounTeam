@@ -10,17 +10,17 @@ class Table extends Component {
         rowData : []
     }
     componentDidMount() {
-        this.useEffect()
+        this.geta()
     }
 
-    useEffect() {
+    geta = ()  => {
         axios.get('https://www.ag-grid.com/example-assets/row-data.json', {
             params: {
             }
         }).then((Response) => {
             this.setState({
                 rowData : Response.data
-                })
+            })
         } )
     }
 
@@ -32,9 +32,9 @@ class Table extends Component {
             >
                 <AgGridReact
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true} filter={true}/>
-                    <AgGridColumn field="model" sortable={true} filter={true}/>
-                    <AgGridColumn field="price" sortable={true} filter={true}/>
+                    <AgGridColumn field="make" sortable={true} filter = { true }/>
+                    <AgGridColumn field="model" sortable={true}/>
+                    <AgGridColumn field="price" sortable={true}/>
                 </AgGridReact>
             </div>
         );
