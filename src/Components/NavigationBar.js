@@ -16,12 +16,12 @@ class NavigationBar extends React.Component {
     }
 
     logout = () => {
-        const cookies = new Cookies;
+        const cookies = new Cookies();
         cookies.remove("logged_in");
         window.location.reload();
     }
     isLoggedIn = () => {
-        const cookies = new Cookies;
+        const cookies = new Cookies();
         if(cookies.get("logged_in")){
             return true;
         }
