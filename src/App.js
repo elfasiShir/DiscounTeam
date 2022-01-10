@@ -6,7 +6,6 @@ import FilteredTable from "./Components/FilteredTable";
 import Cookies from "universal-cookie/lib";
 import {BrowserRouter} from "react-router-dom";
 import {Route} from "react-router";
-import LoginPage from "./Components/LoginPage";
 import About from "./Components/About";
 import SignUp from "./Components/SignUp";
 import Shops from "./Components/Shops";
@@ -16,7 +15,7 @@ import NavigationBar from "./Components/NavigationBar";
 
 class App extends React.Component {
     state = {
-        isLoggedIn : true,
+        isLoggedIn : false,
         token : ""
     }
     componentWillMount() {
@@ -39,8 +38,6 @@ class App extends React.Component {
                             <div style={{display: "flex", alignItem:"start", marginTop: "50px"}}>
                                 <NavigationBar/>
                                 <Redirect to={"/myDiscounts"} />
-                                <Route path={"/loginPage"} component={LoginPage} exact={true}/>
-                                <Route path={"/signUp"} component={SignUp} exact={true}/>
                                 <Route path={"/shops"} component={Shops} exact={true}/>
                                 <Route path={"/myDiscounts"} component={FilteredTable} exact={true}/>
                                 <Route path={"/allDiscounts"} component={Table} exact={true}/>
@@ -51,8 +48,7 @@ class App extends React.Component {
                             :
                             <div style={{display: "flex", alignItem:"start", marginTop: "50px"}}>
                                 <NavigationBar/>
-                                <Redirect to={"/about"} />
-                                <Route path={"/loginPage"} component={LoginPage} exact={true}/>
+                                <Redirect to={"/settings"} />
                                 <Route path={"/signUp"} component={SignUp} exact={true}/>
                                 <Route path={"/shops"} component={Shops} exact={true}/>
                                 <Route path={"/myDiscounts"} component={FilteredTable} exact={true}/>
