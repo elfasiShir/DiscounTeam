@@ -40,7 +40,7 @@ class App extends React.Component {
                                 <Redirect to={"/myDiscounts"} />
                                 <Route path={"/shops"} component={Shops} exact={true}/>
                                 <Route path={"/myDiscounts"} component={FilteredTable} exact={true}/>
-                                <Route path={"/allDiscounts"} component={Table} exact={true}/>
+                                <Route path={"/allDiscounts"} render={(props) => <Table {...props} />} />
                                 <Route path={"/settings"} component={Settings} exact={true}/>
                                 <Route path={"/about"} component={About} exact={true}/>
 

@@ -7,7 +7,7 @@ class Settings extends Component{
         items : [
         {
             name : "teachers",
-            marked : false,
+            marked : true,
         },{
             name : "artists",
             marked : false,
@@ -16,7 +16,7 @@ class Settings extends Component{
             marked : false,
         },{
             name : "puppeteers",
-            marked : false,
+            marked : true,
         },{
             name : "coaches",
             marked : false,
@@ -30,7 +30,7 @@ class Settings extends Component{
                 {
                     this.state.items.map(link => {
                         return (
-                            <button style={{border :"white"}} >
+                            <button style={{border :"white"}}  >
                                 <Item name={link.name} marked={link.marked}/>
                             </button>
                         );

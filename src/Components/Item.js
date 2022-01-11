@@ -16,7 +16,9 @@ function Item(props){
                 color: props.marked ?  "white" : "#222831",
                 borderRadius: "5px",
                 backgroundColor : props.marked ?  "#222831" : "#ffffff"
-            }}>
+            }}
+            id={props.id}
+            name={props.name}>
                 {props.name}
             </fieldset>
         </div>

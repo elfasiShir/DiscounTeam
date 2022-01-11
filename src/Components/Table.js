@@ -7,7 +7,7 @@ import axios from "axios";
 
 class Table extends Component {
     state = {
-        shop:"Ford",
+        shop:"",
         rowData : []
     }
 
@@ -16,8 +16,18 @@ class Table extends Component {
         rowSelection: 'single',
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.geta()
+        if(this.props.location.state !== null) {
+            this.setState({
+                shop: this.props.location.state.shop
+            })
+        }
+        else{
+            this.setState({
+                shop: ""
+            })
+        }
     }
     geta = ()  => {
         axios.get('https://www.ag-grid.com/example-assets/row-data.json', {
