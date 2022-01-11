@@ -7,6 +7,7 @@ import axios from "axios";
 
 class FilteredTable extends Component {
     state = {
+        filter: "Ford",
         rowData : []
     }
     componentDidMount() {
@@ -32,7 +33,7 @@ class FilteredTable extends Component {
             >
                 <AgGridReact
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true}/>
+                    <AgGridColumn field="make" sortable={true} filter={this.state.filter}/>
                     <AgGridColumn field="model" sortable={true}/>
                     <AgGridColumn field="price" sortable={true}/>
                 </AgGridReact>

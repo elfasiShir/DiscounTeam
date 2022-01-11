@@ -48,7 +48,7 @@ class App extends React.Component {
                             :
                             <div style={{display: "flex", alignItem:"start", marginTop: "50px"}}>
                                 <NavigationBar/>
-                                <Redirect to={"/settings"} />
+                                <Redirect to={"/about"} />
                                 <Route path={"/signUp"} component={SignUp} exact={true}/>
                                 <Route path={"/shops"} component={Shops} exact={true}/>
                                 <Route path={"/myDiscounts"} component={FilteredTable} exact={true}/>

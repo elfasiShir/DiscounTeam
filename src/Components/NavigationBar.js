@@ -8,8 +8,8 @@ class NavigationBar extends React.Component {
         links: [
             {title: "Sign-up", path: "/signUp"},
             {title: "Shops", path: "/Shops"},
-            {title: "My Discounts", path: "/myDiscounts"},
-            {title: "All Discounts", path: "/allDiscounts"},
+            {title: "MyDiscounts", path: "/myDiscounts"},
+            {title: "AllDiscounts", path: "/allDiscounts"},
             {title: "Settings", path: "/settings"},
             {title: "About", path: "/about"}
         ]
@@ -45,7 +45,9 @@ class NavigationBar extends React.Component {
                                 );
                             })
                             :
-                            this.state.links.map(link => {
+                            this.state.links.filter(link => {
+                                return link.title !== "My Discounts" && link.title !== "Settings"
+                            }).map(link => {
                                 return (
                                     <NavLink to = {link.path} activeClassName={"active"} style={{marginBottom: "10px", textDecoration: "none", color: "#222831"}}>
                                         <li >{link.title}</li>
@@ -54,7 +56,7 @@ class NavigationBar extends React.Component {
                                 );
                             })
                     }
-                    <button onClick={this.logout}>
+                    <button onClick={this.logout} style={{ background: "#222831", color: "white", border:"white", width:"80px", borderRadius:"2px", height:"25px" }}>
                         Logout
                     </button>
                 </ul>

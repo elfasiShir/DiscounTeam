@@ -7,12 +7,18 @@ import axios from "axios";
 
 class Table extends Component {
     state = {
+        shop:"Ford",
         rowData : []
     }
+
+    gridOptions = {
+        pagination: true,
+        rowSelection: 'single',
+    }
+
     componentDidMount() {
         this.geta()
     }
-
     geta = ()  => {
         axios.get('https://www.ag-grid.com/example-assets/row-data.json', {
             params: {
@@ -24,6 +30,14 @@ class Table extends Component {
         } )
     }
 
+    isExternalFilterPresent = () => {
+        return this.state.shop !== ""
+    }
+
+    doesExternalFilterPass = (node) => {
+        return node.data.make === this.state.shop
+    }
+
     render() {
         return (
             <div
@@ -31,10 +45,15 @@ class Table extends Component {
                 style={{ height: '2000px', width: '600px'}}
             >
                 <AgGridReact
+                    defaultColDef={{
+                        filter: true,
+                    }}
+                    isExternalFilterPresent={this.isExternalFilterPresent}
+                    doesExternalFilterPass={this.doesExternalFilterPass}
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true} filter = { true }/>
-                    <AgGridColumn field="model" sortable={true} filter = { true }/>
-                    <AgGridColumn field="price" sortable={true} filter = { true }/>
+                    <AgGridColumn field="make" sortable={true}/>
+                    <AgGridColumn field="model" sortable={true}/>
+                    <AgGridColumn field="price" sortable={true}/>
                 </AgGridReact>
             </div>
         );
