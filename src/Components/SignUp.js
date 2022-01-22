@@ -69,7 +69,7 @@ class SignUp extends Component{
     login = () => {
         this.setState({validPhoneNumber:"",validStrongPassword:"",response:""})
 
-        axios.get("http://localhost:8989/doesUsernameExists", {
+        axios.get("http://localhost:8989/doesUsernameTaken", {
             params: {
                 username: this.state.username
             }
@@ -85,7 +85,7 @@ class SignUp extends Component{
                         .then((tries) => {
                             if(tries.data !== 0){// if user is NOT blocked, he should be able to log in
 
-                                axios.get("http://localhost:8989/sign-in", {
+                                axios.get("http://localhost:8989/log-in", {
                                     params: {
                                         username: this.state.username,
                                         password: this.state.password

@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 install AG grid
 ##  `npm install --save ag-grid-community ag-grid-react`
 ##  `npm install sass`
+## `npm install react-router`
 In the project directory, you can run:
 
 ### `npm start`

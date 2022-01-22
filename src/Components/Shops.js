@@ -3,10 +3,11 @@ import "../App.scss"
 import Item from "./Item";
 import {Redirect, Route} from "react-router";
 import FilteredTable from "./FilteredTable";
+import axios from "axios";
 
 class Shops extends Component{
     state = {
-        items : [
+        /*items : [
             {
                 name : "urbanika",
                 marked : false,
@@ -64,9 +65,22 @@ class Shops extends Component{
                 marked : false,
                 id: 14
             }
-        ],
+        ]*/
+        shops : [],
         redirect: false,
         currentShopName: ""
+    }
+    componentDidDMount() {
+        this.getShop()
+    }
+    getShop = () => {
+        axios.get('http://localhost:8989/get_all_shops', {
+            params: {
+
+            }
+        }).then((Response) => {
+            this.state.shops = Response.data
+        })
     }
 
     setRedirect = (e) => {
@@ -84,16 +98,15 @@ class Shops extends Component{
                 state:{ shop: this.state.currentShopName }
             }}/>
     }
-
     render(){
         return(
             <div>
-
                 {
-                    this.state.items.map(link => {
+                    this.state.shops.map(link => {
+                        console.log(link)
                         return (
                             <button style={{border :"white"}} onClick={this.setRedirect}>
-                                <Item name={link.name} marked={link.marked} id={link.id}/>
+                                <Item name={link.shopName} marked={false} id={link.id}/>
                             </button>
                         );
                     })
