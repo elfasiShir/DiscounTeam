@@ -17,7 +17,7 @@ class Table extends Component {
     }
 
     componentWillMount() {
-        this.geta()
+        this.getDiscount()
         if(this.props.location.state !== null) {
             this.setState({
                 shop: this.props.location.state.shop
@@ -29,8 +29,9 @@ class Table extends Component {
             })
         }
     }
-    geta = ()  => {
-        axios.get('https://www.ag-grid.com/example-assets/row-data.json', {
+    //www.ag-grid.com/example-assets/row-data.json
+    getDiscount = ()  => {
+        axios.get('http://localhost:8989/get_all_discounts', {
             params: {
             }
         }).then((Response) => {
@@ -61,9 +62,8 @@ class Table extends Component {
                     isExternalFilterPresent={this.isExternalFilterPresent}
                     doesExternalFilterPass={this.doesExternalFilterPass}
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true}/>
-                    <AgGridColumn field="model" sortable={true}/>
-                    <AgGridColumn field="price" sortable={true}/>
+                    <AgGridColumn field="discount" sortable={true}/>
+
                 </AgGridReact>
             </div>
         );

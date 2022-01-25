@@ -4,19 +4,22 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 class FilteredTable extends Component {
     state = {
-        filter: "Ford",
+        filter: "",
         rowData : []
     }
     componentDidMount() {
-        this.geta()
+        this.getDiscounts()
     }
 
-    geta = ()  => {
-        axios.get('https://www.ag-grid.com/example-assets/row-data.json', {
+    getDiscounts = ()  => {
+        const cookies = new Cookies();
+        axios.get('http://localhost:8989/get_all_discounts_for_user', {
             params: {
+                token : cookies.get("logged_in")
             }
         }).then((Response) => {
             this.setState({
@@ -33,9 +36,7 @@ class FilteredTable extends Component {
             >
                 <AgGridReact
                     rowData={this.state.rowData}>
-                    <AgGridColumn field="make" sortable={true} filter={this.state.filter}/>
-                    <AgGridColumn field="model" sortable={true}/>
-                    <AgGridColumn field="price" sortable={true}/>
+                    <AgGridColumn field="discount" sortable={true}/>
                 </AgGridReact>
             </div>
         );
