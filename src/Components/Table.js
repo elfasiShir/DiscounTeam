@@ -63,7 +63,8 @@ class Table extends Component {
                     doesExternalFilterPass={this.doesExternalFilterPass}
                     rowData={this.state.rowData}>
                     <AgGridColumn field="discount" sortable={true}/>
-
+                    <AgGridReact field="shop" sortable={true}/>
+                    <AgGridReact field="organization" sortable={true}/>
                 </AgGridReact>
             </div>
         );
