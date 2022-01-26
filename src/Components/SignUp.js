@@ -22,30 +22,26 @@ class SignUp extends Component{
         })
     }
     signUp = () =>{
-        axios.get("http://localhost:8989/doesUsernameTaken", {
-            params: {
-                username: this.state.username
-            }
-        })
+        let taken_data =  new FormData();
+        taken_data.append("username", this.state.username)
+        axios.get("http://localhost:8989/doesUsernameTaken", taken_data)
             .then((response) => {
                 if(!response.data){
-                    this.setState({ showError : false } )
-                    axios.post("http://localhost:8989/sign-up", {
-                            params: {
-                                username: this.state.username,
-                                password: this.state.password
+                    let sign_data = new FormData();
+                    sign_data.append("username", this.state.username)
+                    sign_data.append("password", this.state.password)
+                    axios.post("http://localhost:8989/sign-up", sign_data)
+                        .then((response) => {
+                            if (response.data) {
+                                this.setState({
+                                    username: "",
+                                    password: "",
+                                    response: "Your account has been created!",
+                                    showError: true,
+                                })
+                            } else {
+                                this.setState({response: "failed to create account", showError: true})
                             }
-                        })
-                            .then((response) => {
-                                console.log(response.data)
-                                if (response.data) {
-                                    this.setState({
-                                        response: "Your account has been created!",
-                                        showError: true,
-                                    })
-                                } else {
-                                    this.setState({response: "failed to create account", showError: true})
-                                }
                         })
                 }
                 else{
@@ -58,7 +54,6 @@ class SignUp extends Component{
     }
     login = () => {
         this.setState({showError : true,response:""})
-
         axios.get("http://localhost:8989/doesUsernameTaken", {
             params: {
                 username: this.state.username
@@ -66,12 +61,12 @@ class SignUp extends Component{
         })
             .then((UserExist) => {
                 if(UserExist.data){
-                axios.get("http://localhost:8989/log-in", {
-                    params: {
-                        username: this.state.username,
-                        password: this.state.password
-                    }
-                })
+                    axios.get("http://localhost:8989/log-in", {
+                        params: {
+                            username: this.state.username,
+                            password: this.state.password
+                        }
+                    })
                     .then((response) => {
                         if (response.data) {
                             const cookies = new Cookies();
