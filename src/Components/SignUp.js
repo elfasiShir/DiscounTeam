@@ -8,9 +8,7 @@ class SignUp extends Component{
         username: "",
         password: "",
         showError: false,
-        response: "",
-        validPhoneNumber: "",
-        validStrongPassword: ""
+        response: ""
     }
     onUsernameChange = (e) => {
         let username = e.target.value;
@@ -24,21 +22,15 @@ class SignUp extends Component{
         })
     }
     signUp = () =>{
-        axios.get("http://localhost:8989/doesUsernameExists", {
+        axios.get("http://localhost:8989/doesUsernameTaken", {
             params: {
                 username: this.state.username
             }
         })
             .then((response) => {
                 if(!response.data){
-                    this.setState({validPhoneNumber:"",validStrongPassword:"",response:""})
-                    let reg = new RegExp(/[0][5][023458]\d{7}/);
-                    const validPhoneNumber = reg.test(this.state.username) && this.state.username.length === 10;
-                    if(!validPhoneNumber){this.setState({validPhoneNumber: "* your phone number isn't valid"})}
-                    const validStrongPassword = (/[a-zA-Z]/g.test(this.state.password) && /\d/g.test(this.state.password) && 6<= this.state.password.length);
-                    if(!validStrongPassword){this.setState({validStrongPassword: "* not a strong password, must contain: 6 letters long or more, needs at least one Uppercase and lower case character, must not contain symbols"})}
-                    if(validPhoneNumber && validStrongPassword) {
-                        axios.get("http://localhost:8989/create-account", {
+                    this.setState({ showError : false } )
+                    axios.get("http://localhost:8989/sign-up", {
                             params: {
                                 username: this.state.username,
                                 password: this.state.password
@@ -56,12 +48,12 @@ class SignUp extends Component{
                                 } else {
                                     this.setState({response: "failed to create account", showError: true})
                                 }
-                            })
-                    }
+                        })
                 }
                 else{
                     this.setState({
-                        response : "this phone number is in use"
+                        response : "this user is in use",
+                        showError : true
                     })
                 }
             })
