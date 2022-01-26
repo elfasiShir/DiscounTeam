@@ -23,18 +23,8 @@ class FilteredTable extends Component {
             }
         }).then((Response) => {
             this.setState({
-                rowData : []
+                rowData : Response.data
             })
-            Response.data.map((link) => {
-                this.setState({
-                    rowData : [...this.state.rowData, {
-                        discount : link[0],
-                        shop : link[1],
-                        organization : link[2]
-                    }]
-                })
-            })
-
         } )
     }
 
@@ -47,8 +37,7 @@ class FilteredTable extends Component {
                 <AgGridReact
                     rowData={this.state.rowData}>
                     <AgGridColumn field="discount" sortable={true}/>
-                    <AgGridReact field="shop" sortable={true}/>
-                    <AgGridReact field="organization" sortable={true}/>
+                    <AgGridReact field="discountShop" sortable={true}/>
                 </AgGridReact>
             </div>
         );

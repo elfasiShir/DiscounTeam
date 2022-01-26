@@ -31,21 +31,12 @@ class Table extends Component {
     }
     //www.ag-grid.com/example-assets/row-data.json
     getDiscount = ()  => {
-        axios.get('http://localhost:8989/get_all_discounts_to_table', {
+        axios.get('http://localhost:8989/getAllDiscountsForTable', {
             params: {
             }
         }).then((Response) => {
             this.setState({
-                rowData : []
-            })
-            Response.data.map((link) => {
-                this.setState({
-                    rowData : [...this.state.rowData, {
-                        discount : link[0],
-                        shop : link[1],
-                        organization : link[2]
-                    }]
-                })
+                rowData : Response.data
             })
         } )
     }
@@ -73,7 +64,7 @@ class Table extends Component {
                     rowData={this.state.rowData}>
                     <AgGridColumn field="discount" sortable={true}/>
                     <AgGridReact field="shop" sortable={true}/>
-                    <AgGridReact field="organization" sortable={true}/>
+
                 </AgGridReact>
             </div>
         );

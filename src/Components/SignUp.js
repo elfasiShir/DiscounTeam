@@ -131,11 +131,11 @@ class SignUp extends Component{
                     <div>
                         <button style={buttonStyle} onClick={this.signUp} disabled={!hasRequiredDetails} >Sign Up</button>
                     </div>
-
+                    {
+                        this.state.showError ? <div style={{color: "red"}}>{this.state.response}</div> : <div/>
+                    }
                 </fieldset>
-                {
-                    this.state.showError ? <div style={{color: "red"}}>{this.state.response}</div> : <div/>
-                }
+
             </div>
         )
     }

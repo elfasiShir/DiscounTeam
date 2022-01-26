@@ -14,6 +14,8 @@ import {Redirect} from "react-router";
 import NavigationBar from "./Components/NavigationBar";
 
 class App extends React.Component {
+    cookies = new Cookies();
+    ws  = new WebSocket("ws://localhost:8989/stream?token=" + this.cookies.get("logged_in"))
     state = {
         isLoggedIn : false,
         token : ""
@@ -25,6 +27,11 @@ class App extends React.Component {
                 isLoggedIn: true,
                 token : cookies.get("logged_in")
             })
+        }
+    }
+    componentDidMount() {
+        this.ws.onmessage = (message) => {
+            alert(message.data)
         }
     }
 
