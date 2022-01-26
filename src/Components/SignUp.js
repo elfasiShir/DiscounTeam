@@ -30,7 +30,7 @@ class SignUp extends Component{
             .then((response) => {
                 if(!response.data){
                     this.setState({ showError : false } )
-                    axios.get("http://localhost:8989/sign-up", {
+                    axios.post("http://localhost:8989/sign-up", {
                             params: {
                                 username: this.state.username,
                                 password: this.state.password
@@ -57,7 +57,7 @@ class SignUp extends Component{
             })
     }
     login = () => {
-        this.setState({validPhoneNumber:"",validStrongPassword:"",response:""})
+        this.setState({showError : true,response:""})
 
         axios.get("http://localhost:8989/doesUsernameTaken", {
             params: {
@@ -66,55 +66,28 @@ class SignUp extends Component{
         })
             .then((UserExist) => {
                 if(UserExist.data){
-
-                    axios.get("http://localhost:8989/isBlocked", {
-                        params:{
-                            username: this.state.username
+                axios.get("http://localhost:8989/log-in", {
+                    params: {
+                        username: this.state.username,
+                        password: this.state.password
+                    }
+                })
+                    .then((response) => {
+                        if (response.data) {
+                            const cookies = new Cookies();
+                            cookies.set("logged_in", response.data);
+                            window.location.reload();
+                        } else {
+                            this.setState({
+                                showError: true,
+                                response: "Wrong password"
+                            })
                         }
                     })
-                        .then((tries) => {
-                            if(tries.data !== 0){// if user is NOT blocked, he should be able to log in
-
-                                axios.get("http://localhost:8989/log-in", {
-                                    params: {
-                                        username: this.state.username,
-                                        password: this.state.password
-                                    }
-                                })
-                                    .then((response) => {
-                                        if (response.data) {
-                                            const cookies = new Cookies();
-                                            cookies.set("logged_in", response.data);
-
-                                            axios.get("http://localhost:8989/updateLoginTries", {
-                                                params:{
-                                                    username : this.state.username
-                                                }
-                                            }).then()
-                                            window.location.reload();
-
-                                        } else {
-                                            this.setState({
-                                                showError: true,
-                                                response: "Wrong password, tries left: " + (tries.data - 1)
-                                            })
-                                            axios.get("http://localhost:8989/countDownTries", {
-                                                params: {
-                                                    username: this.state.username
-                                                }
-                                            }).then()
-                                        }
-                                    })
-                            }
-                            else{ // user has 0 tries
-                                this.setState({
-                                    response: "this user is blocked and wont be able to log in, create a new user"
-                                })
-                            }
-                        })
                 }
                 else{
                     this.setState({
+                        showError:true,
                         response: "user doesnt exist"
                     })
                 }
@@ -163,7 +136,9 @@ class SignUp extends Component{
                     </div>
 
                 </fieldset>
-                <div style={{color: "red"}}>{this.state.response}</div>
+                {
+                    this.state.showError ? <div style={{color: "red"}}>{this.state.response}</div> : <div/>
+                }
             </div>
         )
     }
