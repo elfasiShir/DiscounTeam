@@ -23,8 +23,18 @@ class FilteredTable extends Component {
             }
         }).then((Response) => {
             this.setState({
-                rowData : Response.data
+                rowData : []
             })
+            Response.data.map((link) => {
+                this.setState({
+                    rowData : [...this.state.rowData, {
+                        discount : link[0],
+                        shop : link[1],
+                        organization : link[2]
+                    }]
+                })
+            })
+
         } )
     }
 

@@ -41,7 +41,7 @@ class App extends React.Component {
                                 <Route path={"/shops"} component={Shops} exact={true}/>
                                 <Route path={"/myDiscounts"} component={FilteredTable} exact={true}/>
                                 <Route path={"/allDiscounts"} render={(props) => <Table {...props} />} />
-                                <Route path={"/settings"} component={Settings} exact={true}/>
+                                <Route path={"/settings"} component={Settings} exact={true} />
                                 <Route path={"/about"} component={About} exact={true}/>
 
                             </div>

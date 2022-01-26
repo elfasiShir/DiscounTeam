@@ -31,12 +31,21 @@ class Table extends Component {
     }
     //www.ag-grid.com/example-assets/row-data.json
     getDiscount = ()  => {
-        axios.get('http://localhost:8989/get_all_discounts', {
+        axios.get('http://localhost:8989/get_all_discounts_to_table', {
             params: {
             }
         }).then((Response) => {
             this.setState({
-                rowData : Response.data
+                rowData : []
+            })
+            Response.data.map((link) => {
+                this.setState({
+                    rowData : [...this.state.rowData, {
+                        discount : link[0],
+                        shop : link[1],
+                        organization : link[2]
+                    }]
+                })
             })
         } )
     }
