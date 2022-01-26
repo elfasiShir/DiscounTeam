@@ -41,8 +41,6 @@ class SignUp extends Component{
                                 if (response.data) {
                                     this.setState({
                                         response: "Your account has been created!",
-                                        validPhoneNumber:"",
-                                        validStrongPassword:"",
                                         showError: true,
                                     })
                                 } else {
@@ -149,7 +147,7 @@ class SignUp extends Component{
                     <input style={inputStyle}
                            onChange={this.onUsernameChange}
                            value={this.state.username}
-                           placeholder={"Enter PhoneNumber"}
+                           placeholder={"Enter username"}
                     />
                     <input style={inputStyle}
                            onChange={this.onPasswordChange}
@@ -166,8 +164,6 @@ class SignUp extends Component{
 
                 </fieldset>
                 <div style={{color: "red"}}>{this.state.response}</div>
-                <div style={{color: "red"}}>{this.state.validStrongPassword}</div>
-                <div style={{color: "red"}}>{this.state.validPhoneNumber}</div>
             </div>
         )
     }
