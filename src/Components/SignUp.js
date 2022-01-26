@@ -22,9 +22,11 @@ class SignUp extends Component{
         })
     }
     signUp = () =>{
-        let taken_data =  new FormData();
-        taken_data.append("username", this.state.username)
-        axios.get("http://localhost:8989/doesUsernameTaken", taken_data)
+        axios.get("http://localhost:8989/doesUsernameTaken", {
+            params : {
+                username : this.state.username
+            }
+        })
             .then((response) => {
                 if(!response.data){
                     let sign_data = new FormData();
@@ -67,18 +69,18 @@ class SignUp extends Component{
                             password: this.state.password
                         }
                     })
-                    .then((response) => {
-                        if (response.data) {
-                            const cookies = new Cookies();
-                            cookies.set("logged_in", response.data);
-                            window.location.reload();
-                        } else {
-                            this.setState({
-                                showError: true,
-                                response: "Wrong password"
-                            })
-                        }
-                    })
+                        .then((response) => {
+                            if (response.data) {
+                                const cookies = new Cookies();
+                                cookies.set("logged_in", response.data);
+                                window.location.reload();
+                            } else {
+                                this.setState({
+                                    showError: true,
+                                    response: "Wrong password"
+                                })
+                            }
+                        })
                 }
                 else{
                     this.setState({
